@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  teemi-front-end:
+    build:
+      context: ./teemi-front-end
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    networks:
+      - my-project-teemi_app-network
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+
+  teemi-back-end:
+    build:
+      context: ./teemi-back-end
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - DB_SERVER=202.28.34.203\SQLEXPRESS
+      - DB_USER=APD66_64011212016
+      - DB_PASS=ZX0LE35U
+      - DB_NAME=APD66_64011212016
+    networks:
+      - my-project-teemi_app-network
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+
+networks:
+  my-project-teemi_app-network:
+    driver: bridge
